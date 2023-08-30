@@ -71,8 +71,8 @@ class TicketServiceImplTest {
                 Ticket.of(1000, 50000, Grade.S)
         );
 
-        tickets.forEach(ticket -> ticket.setPerformance(performance));  // connect ticket to performance
-        performance.getTicketList().addAll(tickets);  // add tickets to performance's ticket list
+        tickets.forEach(ticket -> ticket.setPerformance(performance));
+        performance.getTicketList().addAll(tickets);
 
         when(performanceRepository.findById(showId)).thenReturn(Optional.of(performance));
 
