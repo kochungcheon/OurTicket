@@ -1,17 +1,21 @@
 package Ko.OurTicket.Performance;
 
 import jakarta.persistence.Embeddable;
+import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@NoArgsConstructor
 public class PerformanceDate {
-    private String PerformanceStartDate;
-    private String PerformanceEndDate;
+    private LocalDateTime performanceStartDate;
+    private LocalDateTime performanceEndDate;
 
-    private PerformanceDate(final String performanceStartDate, final String performanceEndDate) {
-        PerformanceStartDate = performanceStartDate;
-        PerformanceEndDate = performanceEndDate;
+    public PerformanceDate(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate) {
+        this.performanceStartDate = performanceStartDate;
+        this.performanceEndDate = performanceEndDate;
     }
-    public static PerformanceDate of(final String performanceStartDate, final String performanceEndDate){
+
+    public static PerformanceDate of(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate){
         return new PerformanceDate(performanceStartDate, performanceEndDate);
     }
 }

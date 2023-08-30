@@ -6,11 +6,8 @@ import static org.mockito.Mockito.when;
 import Ko.OurTicket.Performance.Performance;
 import Ko.OurTicket.Performance.PerformanceDate;
 import Ko.OurTicket.Performance.PerformanceRepository;
-import Ko.OurTicket.Ticket.Grade;
-import Ko.OurTicket.Ticket.Ticket;
-import Ko.OurTicket.Ticket.TicketRepository;
-import Ko.OurTicket.Ticket.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +59,7 @@ class TicketServiceImplTest {
         Long showId = 1L;
         final String name = "레베카";
         final String description = "...";
-        PerformanceDate performanceDate = PerformanceDate.of("2023-01-01", "2023-01-31");
+        PerformanceDate performanceDate = PerformanceDate.of(LocalDateTime.parse("2023-01-01"), LocalDateTime.parse("2023-01-31"));
         Performance performance = Performance.of(name, description, performanceDate);
 
         List<Ticket> tickets = Arrays.asList(
