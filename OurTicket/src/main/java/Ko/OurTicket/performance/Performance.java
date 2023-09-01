@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Entity @Getter
+@Entity
+@Getter
 public class Performance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
