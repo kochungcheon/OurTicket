@@ -2,7 +2,6 @@ package Ko.OurTicket.Ticket;
 
 import Ko.OurTicket.performance.Performance;
 import Ko.OurTicket.performance.PerformanceRepository;
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
