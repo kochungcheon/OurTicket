@@ -77,7 +77,7 @@ class TicketServiceTest {
         map.put(Grade.VIP, 10);
         map.put(Grade.R, 100);
         map.put(Grade.S, 1000);
-        GradeCount expected = new GradeCount(map);
+        GradeCount expected = GradeCount.of(map);
         GradeCount actual = ticketService.countTicketByGradeForShow(showId);
 
         assertEquals(expected, actual);
