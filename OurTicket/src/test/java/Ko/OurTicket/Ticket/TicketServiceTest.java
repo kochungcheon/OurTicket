@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import Ko.OurTicket.performance.Performance;
-import Ko.OurTicket.performance.PerformanceDate;
+import Ko.OurTicket.performance.PerformanceDateTime;
 import Ko.OurTicket.performance.PerformanceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
@@ -59,8 +59,8 @@ class TicketServiceTest {
         Long showId = 1L;
         final String name = "레베카";
         final String description = "...";
-        PerformanceDate performanceDate = PerformanceDate.of(LocalDateTime.parse("2023-01-01T00:00:00"), LocalDateTime.parse("2023-01-31T01:00:00"));
-        Performance performance = Performance.of(name, description, performanceDate);
+        PerformanceDateTime performanceDateTime = PerformanceDateTime.of(LocalDateTime.parse("2023-01-01T00:00:00"), LocalDateTime.parse("2023-01-31T01:00:00"));
+        Performance performance = Performance.of(name, description, performanceDateTime);
 
         List<Ticket> tickets = Arrays.asList(
                 Ticket.of(10, 100000, Grade.VIP),

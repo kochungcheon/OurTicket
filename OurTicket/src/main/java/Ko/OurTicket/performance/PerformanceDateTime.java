@@ -6,16 +6,16 @@ import lombok.NoArgsConstructor;
 
 @Embeddable
 @NoArgsConstructor
-public class PerformanceDate {
+public class PerformanceDateTime {
     private LocalDateTime performanceStartDate;
     private LocalDateTime performanceEndDate;
 
-    public PerformanceDate(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate) {
+    public PerformanceDateTime(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate) {
         this.performanceStartDate = performanceStartDate;
         this.performanceEndDate = performanceEndDate;
     }
 
-    public static PerformanceDate of(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate){
-        return new PerformanceDate(performanceStartDate, performanceEndDate);
+    public static PerformanceDateTime of(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDate){
+        return new PerformanceDateTime(performanceStartDate, performanceEndDate);
     }
 }
