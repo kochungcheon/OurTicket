@@ -1,11 +1,11 @@
-package Ko.OurTicket.Ticket;
+package ko.ourticket.Ticket;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import Ko.OurTicket.performance.Performance;
-import Ko.OurTicket.performance.PerformanceDateTime;
-import Ko.OurTicket.performance.PerformanceRepository;
+import ko.ourticket.performance.Performance;
+import ko.ourticket.performance.PerformanceDateTime;
+import ko.ourticket.performance.PerformanceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 import java.util.Arrays;

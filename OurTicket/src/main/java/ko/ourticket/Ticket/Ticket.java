@@ -1,6 +1,6 @@
-package Ko.OurTicket.Ticket;
+package ko.ourticket.Ticket;
 
-import Ko.OurTicket.performance.Performance;
+import ko.ourticket.performance.Performance;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,7 +1,7 @@
-package Ko.OurTicket.Ticket;
+package ko.ourticket.Ticket;
 
-import Ko.OurTicket.performance.Performance;
-import Ko.OurTicket.performance.PerformanceRepository;
+import ko.ourticket.performance.Performance;
+import ko.ourticket.performance.PerformanceRepository;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;

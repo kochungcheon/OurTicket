@@ -1,4 +1,4 @@
-package Ko.OurTicket.Ticket;
+package ko.ourticket.Ticket;
 
 public enum Grade {
     VIP("최고 등급 좌석"),

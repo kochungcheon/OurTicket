@@ -1,6 +1,6 @@
-package Ko.OurTicket.performance;
+package ko.ourticket.performance;
 
-import Ko.OurTicket.Ticket.Ticket;
+import ko.ourticket.Ticket.Ticket;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;

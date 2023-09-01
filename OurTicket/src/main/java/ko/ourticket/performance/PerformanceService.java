@@ -1,4 +1,4 @@
-package Ko.OurTicket.performance;
+package ko.ourticket.performance;
 
 import org.springframework.stereotype.Service;
 

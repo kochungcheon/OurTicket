@@ -1,4 +1,4 @@
-package Ko.OurTicket.Ticket;
+package ko.ourticket.Ticket;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

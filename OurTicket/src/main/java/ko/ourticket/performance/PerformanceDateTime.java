@@ -1,4 +1,4 @@
-package Ko.OurTicket.performance;
+package ko.ourticket.performance;
 
 import jakarta.persistence.Embeddable;
 import java.time.LocalDateTime;
