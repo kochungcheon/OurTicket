@@ -19,9 +19,8 @@ public class TicketService{
         this.performanceRepository = performanceRepository;
     }
 
-    public GradeCount countTicketByGradeForShow(Long showId) {
-        Performance performance = performanceRepository.findById(showId).orElseThrow();
-        List<Ticket> tickets = performance.getTickets();
+    public GradeCount countTicketByGradeForPerformance(Long performanceId) {
+        List<Ticket> tickets = ticketRepository.findByPerformanceId(performanceId);
         Map<Grade, Integer> result = tickets.stream()
                 .collect(Collectors.groupingBy(
                         Ticket::getGrade,

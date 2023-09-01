@@ -56,7 +56,7 @@ class TicketServiceTest {
     @DisplayName("공연 티켓 잔여 개수 조회에 성공한다")
     @Test
     void countTicketByGradeForShow() throws Exception {
-        Long showId = 1L;
+        Long performanceId = 1L;
         final String name = "레베카";
         final String description = "...";
         PerformanceDateTime performanceDateTime = PerformanceDateTime.of(LocalDateTime.parse("2023-01-01T00:00:00"), LocalDateTime.parse("2023-01-31T01:00:00"));
@@ -68,17 +68,14 @@ class TicketServiceTest {
                 Ticket.of(1000, 50000, Grade.S)
         );
 
-        tickets.forEach(ticket -> ticket.setPerformance(performance));
-        performance.getTickets().addAll(tickets);
-
-        when(performanceRepository.findById(showId)).thenReturn(Optional.of(performance));
-
+        tickets.forEach(ticket -> ticket.setPerformance(performance.getId()));
+        when(ticketRepository.findByPerformanceId(performanceId)).thenReturn(tickets);
         Map<Grade, Integer> map = new HashMap<>();
         map.put(Grade.VIP, 10);
         map.put(Grade.R, 100);
         map.put(Grade.S, 1000);
         GradeCount expected = GradeCount.of(map);
-        GradeCount actual = ticketService.countTicketByGradeForShow(showId);
+        GradeCount actual = ticketService.countTicketByGradeForPerformance(performanceId);
 
         assertEquals(expected, actual);
     }
