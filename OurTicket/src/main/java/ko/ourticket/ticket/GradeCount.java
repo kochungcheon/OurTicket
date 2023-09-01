@@ -1,4 +1,4 @@
-package ko.ourticket.Ticket;
+package ko.ourticket.ticket;
 
 import java.util.Map;
 

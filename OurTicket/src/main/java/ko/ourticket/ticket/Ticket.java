@@ -1,4 +1,4 @@
-package ko.ourticket.Ticket;
+package ko.ourticket.ticket;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

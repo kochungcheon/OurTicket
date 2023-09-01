@@ -1,6 +1,5 @@
-package ko.ourticket.Ticket;
+package ko.ourticket.ticket;
 
-import ko.ourticket.performance.Performance;
 import ko.ourticket.performance.PerformanceRepository;
 import java.util.EnumMap;
 import java.util.List;
@@ -11,12 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class TicketService{
     private TicketRepository ticketRepository;
-    private PerformanceRepository performanceRepository;
 
-    public TicketService(final TicketRepository ticketRepository,
-                         final PerformanceRepository performanceRepository) {
+    public TicketService(final TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
-        this.performanceRepository = performanceRepository;
     }
 
     public GradeCount countTicketByGradeForPerformance(Long performanceId) {
