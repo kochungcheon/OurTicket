@@ -3,6 +3,5 @@ package Ko.OurTicket.performance;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface PerformanceService {
-
+public class PerformanceService {
 }

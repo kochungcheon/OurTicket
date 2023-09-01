@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class TicketServiceImplTest {
+class TicketServiceTest {
 
     @Autowired
     protected MockMvc mockMvc;
