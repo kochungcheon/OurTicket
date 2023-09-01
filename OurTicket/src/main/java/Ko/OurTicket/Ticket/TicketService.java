@@ -2,6 +2,7 @@ package Ko.OurTicket.Ticket;
 
 import Ko.OurTicket.performance.Performance;
 import Ko.OurTicket.performance.PerformanceRepository;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +20,15 @@ public class TicketService{
         this.performanceRepository = performanceRepository;
     }
 
-    public Map<Grade, Integer> countTicketByGradeForShow(Long showId) {
+    public GradeCount countTicketByGradeForShow(Long showId) {
         Performance performance = performanceRepository.findById(showId).orElseThrow();
         List<Ticket> tickets = performance.getTickets();
-        return tickets.stream()
+        Map<Grade, Integer> result = tickets.stream()
                 .collect(Collectors.groupingBy(
                         Ticket::getGrade,
-                        () -> new EnumMap<>(Grade.class),
+                        ()-> new EnumMap<Grade, Integer>(Grade.class),
                         Collectors.summingInt(Ticket::getSeatCount)
                 ));
+        return new GradeCount(result);
     }
 }

@@ -73,12 +73,12 @@ class TicketServiceTest {
 
         when(performanceRepository.findById(showId)).thenReturn(Optional.of(performance));
 
-        Map<Grade, Integer> expected = new HashMap<>();
-        expected.put(Grade.VIP, 10);
-        expected.put(Grade.R, 100);
-        expected.put(Grade.S, 1000);
-
-        Map<Grade, Integer> actual = ticketService.countTicketByGradeForShow(showId);
+        Map<Grade, Integer> map = new HashMap<>();
+        map.put(Grade.VIP, 10);
+        map.put(Grade.R, 100);
+        map.put(Grade.S, 1000);
+        GradeCount expected = new GradeCount(map);
+        GradeCount actual = ticketService.countTicketByGradeForShow(showId);
 
         assertEquals(expected, actual);
     }
