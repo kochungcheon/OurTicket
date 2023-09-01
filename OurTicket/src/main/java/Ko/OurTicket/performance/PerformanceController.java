@@ -1,4 +1,4 @@
-package Ko.OurTicket.Performance;
+package Ko.OurTicket.performance;
 
 import org.springframework.web.bind.annotation.RestController;
 

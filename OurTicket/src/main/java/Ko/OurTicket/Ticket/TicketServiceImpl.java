@@ -1,7 +1,7 @@
 package Ko.OurTicket.Ticket;
 
-import Ko.OurTicket.Performance.Performance;
-import Ko.OurTicket.Performance.PerformanceRepository;
+import Ko.OurTicket.performance.Performance;
+import Ko.OurTicket.performance.PerformanceRepository;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class TicketServiceImpl implements TicketService{
     @Override
     public Map<Grade, Integer> countTicketByGradeForShow(Long showId) {
         Performance performance = performanceRepository.findById(showId).orElseThrow();
-        List<Ticket> tickets = performance.getTicketList();
+        List<Ticket> tickets = performance.getTickets();
         return tickets.stream()
                 .collect(Collectors.groupingBy(
                         Ticket::getGrade,

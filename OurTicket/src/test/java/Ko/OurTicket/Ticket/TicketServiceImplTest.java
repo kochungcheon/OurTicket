@@ -3,9 +3,9 @@ package Ko.OurTicket.Ticket;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import Ko.OurTicket.Performance.Performance;
-import Ko.OurTicket.Performance.PerformanceDate;
-import Ko.OurTicket.Performance.PerformanceRepository;
+import Ko.OurTicket.performance.Performance;
+import Ko.OurTicket.performance.PerformanceDate;
+import Ko.OurTicket.performance.PerformanceRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -59,7 +59,7 @@ class TicketServiceImplTest {
         Long showId = 1L;
         final String name = "레베카";
         final String description = "...";
-        PerformanceDate performanceDate = PerformanceDate.of(LocalDateTime.parse("2023-01-01"), LocalDateTime.parse("2023-01-31"));
+        PerformanceDate performanceDate = PerformanceDate.of(LocalDateTime.parse("2023-01-01T00:00:00"), LocalDateTime.parse("2023-01-31T01:00:00"));
         Performance performance = Performance.of(name, description, performanceDate);
 
         List<Ticket> tickets = Arrays.asList(
@@ -69,7 +69,7 @@ class TicketServiceImplTest {
         );
 
         tickets.forEach(ticket -> ticket.setPerformance(performance));
-        performance.getTicketList().addAll(tickets);
+        performance.getTickets().addAll(tickets);
 
         when(performanceRepository.findById(showId)).thenReturn(Optional.of(performance));
 

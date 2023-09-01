@@ -1,4 +1,4 @@
-package Ko.OurTicket.Performance;
+package Ko.OurTicket.performance;
 
 import Ko.OurTicket.Ticket.Ticket;
 import jakarta.persistence.CascadeType;
@@ -24,7 +24,7 @@ public class Performance {
     @Embedded
     private PerformanceDate performanceDate;
     @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> ticketList = new ArrayList<>();
+    private List<Ticket> tickets = new ArrayList<>();
     protected Performance(){}
     private Performance(final String name, final String description, final PerformanceDate performanceDate) {
         this.name = name;
