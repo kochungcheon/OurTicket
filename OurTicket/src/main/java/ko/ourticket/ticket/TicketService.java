@@ -1,5 +1,6 @@
 package ko.ourticket.ticket;
 
+import ko.ourticket.performance.Performance;
 import ko.ourticket.performance.PerformanceRepository;
 import java.util.EnumMap;
 import java.util.List;
@@ -17,12 +18,6 @@ public class TicketService{
 
     public GradeCount countTicketByGradeForPerformance(Long performanceId) {
         List<Ticket> tickets = ticketRepository.findByPerformanceId(performanceId);
-        Map<Grade, Integer> result = tickets.stream()
-                .collect(Collectors.groupingBy(
-                        Ticket::getGrade,
-                        ()-> new EnumMap<Grade, Integer>(Grade.class),
-                        Collectors.summingInt(Ticket::getSeatCount)
-                ));
-        return new GradeCount(result);
+        return GradeCount.from(tickets);
     }
 }
