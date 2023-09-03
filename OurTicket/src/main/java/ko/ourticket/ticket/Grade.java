@@ -5,13 +5,11 @@ public enum Grade {
     R("중간 등급 좌석"),
     S("일반 등급 좌석");
 
-    private String description;
+    private final String description;
     private Grade(String description){
         this.description = description;
     }
     public String getDescription(){
         return this.description;
     }
-
-
 }
