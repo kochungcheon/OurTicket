@@ -36,7 +36,9 @@ public class TicketServiceTest {
     void countTicketByGradeForShow() throws Exception {
         final String name = "레베카";
         final String description = "...";
-        PerformanceDateTime performanceDateTime = PerformanceDateTime.of(LocalDateTime.parse("2023-01-01T00:00:00"), LocalDateTime.parse("2023-01-31T01:00:00"));
+        final String performanceStartDateTime = "2023-01-01T00:00:00";
+        final String performanceEndDateTimeTime = "2023-01-31T01:00:00";
+        PerformanceDateTime performanceDateTime = PerformanceDateTime.of(LocalDateTime.parse(performanceStartDateTime), LocalDateTime.parse(performanceEndDateTimeTime));
         Performance performance = Performance.of(name, description, performanceDateTime);
 
         List<Ticket> tickets = Arrays.asList(
@@ -45,9 +47,7 @@ public class TicketServiceTest {
                 Ticket.of(1000, 50000, Grade.S)
         );
 
-        for (Ticket ticket : tickets) {
-            performance.addTicketId(ticket.getId());
-        }
+        tickets.forEach(ticket -> performance.addTicketId(ticket.getId()));
 
         when(ticketRepository.findAllById(performance.getTicketIds())).thenReturn(tickets);
 
