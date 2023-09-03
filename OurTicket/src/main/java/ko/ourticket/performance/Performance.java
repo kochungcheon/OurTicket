@@ -1,11 +1,14 @@
 package ko.ourticket.performance;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 
 @Entity
@@ -20,6 +23,9 @@ public class Performance {
     @Embedded
     private PerformanceDateTime performanceDateTime;
 
+    @ElementCollection
+    private List<Long> ticketIds = new ArrayList<>();
+
     protected Performance(){}
     private Performance(final String name, final String description,
                         final PerformanceDateTime performanceDateTime) {
@@ -30,5 +36,9 @@ public class Performance {
     public static Performance of(final String name, final String description,
                                  final PerformanceDateTime performanceDateTime){
         return new Performance(name, description, performanceDateTime);
+    }
+
+    public void addTicketId(Long ticketId) {
+        this.ticketIds.add(ticketId);
     }
 }
