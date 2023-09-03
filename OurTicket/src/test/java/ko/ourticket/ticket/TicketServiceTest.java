@@ -38,7 +38,9 @@ public class TicketServiceTest {
         final String description = "...";
         final String performanceStartDateTime = "2023-01-01T00:00:00";
         final String performanceEndDateTimeTime = "2023-01-31T01:00:00";
-        PerformanceDateTime performanceDateTime = PerformanceDateTime.of(LocalDateTime.parse(performanceStartDateTime), LocalDateTime.parse(performanceEndDateTimeTime));
+        PerformanceDateTime performanceDateTime = PerformanceDateTime.of(
+                LocalDateTime.parse(performanceStartDateTime),
+                LocalDateTime.parse(performanceEndDateTimeTime));
         Performance performance = Performance.of(name, description, performanceDateTime);
 
         List<Ticket> tickets = Arrays.asList(
