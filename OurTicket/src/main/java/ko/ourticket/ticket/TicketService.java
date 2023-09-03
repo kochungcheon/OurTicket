@@ -15,8 +15,6 @@ public class TicketService{
     private final TicketRepository ticketRepository;
 
     public GradeCount countTicketByGradeForPerformance(Performance performance) {
-        List<Long> ticketIds = performance.getTicketIds();
-        List<Ticket> tickets = ticketRepository.findAllById(ticketIds);
-        return GradeCount.from(tickets);
+        return GradeCount.from(ticketRepository.findAllById(performance.getTicketIds()));
     }
 }
