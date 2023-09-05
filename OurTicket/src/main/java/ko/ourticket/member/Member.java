@@ -26,10 +26,8 @@ public class Member {
     @Column(nullable = false)
     private String password;
     private Long accountId;
-
     protected Member(){
     }
-
     private Member(final String nickName, final String password) {
         this.nickName = nickName;
         this.password = password;
@@ -37,5 +35,8 @@ public class Member {
 
     public static Member of(final String nickName, final String password) {
         return new Member(nickName, password);
+    }
+    public void addAccount(Long accountId){
+        this.accountId = accountId;
     }
 }

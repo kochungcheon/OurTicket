@@ -10,9 +10,9 @@ public class PerformanceDateTime {
     private LocalDateTime performanceStartDateTime;
     private LocalDateTime performanceEndDateTime;
 
-    public PerformanceDateTime(final LocalDateTime performanceStartDate,
+    public PerformanceDateTime(final LocalDateTime performanceStartDateTime,
                                final LocalDateTime performanceEndDateTime) {
-        this.performanceStartDateTime = performanceStartDate;
+        this.performanceStartDateTime = performanceStartDateTime;
         this.performanceEndDateTime = performanceEndDateTime;
     }
 

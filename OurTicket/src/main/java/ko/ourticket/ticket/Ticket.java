@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 
+
 @Getter
 @Entity
 public class Ticket {
@@ -22,18 +23,19 @@ public class Ticket {
     private Grade grade;
 
     private Long performanceId;
+    private Long memberTicketId;
     public void setPerformance(Long performanceId){
         this.performanceId = performanceId;
     }
     protected Ticket(){}
 
-    private Ticket(final Integer seatCount, final Integer fixedPrice,
+    private Ticket(final int seatCount, final int fixedPrice,
                    final Grade grade) {
         this.seatCount = seatCount;
         this.fixedPrice = fixedPrice;
         this.grade = grade;
     }
-    public static Ticket of(final Integer seatCount, final Integer fixedPrice,
+    public static Ticket of(final int seatCount, final int fixedPrice,
                             final Grade grade){
         return new Ticket(seatCount, fixedPrice, grade);
     }
