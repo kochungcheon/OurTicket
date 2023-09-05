@@ -1,4 +1,4 @@
-package com.ticketease.te.account;
+package ko.ourticket.account;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
