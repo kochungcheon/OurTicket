@@ -16,8 +16,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Long id;
-    private int seatCount;
-    private int fixedPrice;
+    private Integer seatCount;
+    private Integer fixedPrice;
     @Enumerated(value = EnumType.STRING)
     private Grade grade;
 
@@ -27,13 +27,13 @@ public class Ticket {
     }
     protected Ticket(){}
 
-    private Ticket(final int seatCount, final int fixedPrice,
+    private Ticket(final Integer seatCount, final Integer fixedPrice,
                    final Grade grade) {
         this.seatCount = seatCount;
         this.fixedPrice = fixedPrice;
         this.grade = grade;
     }
-    public static Ticket of(final int seatCount, final int fixedPrice,
+    public static Ticket of(final Integer seatCount, final Integer fixedPrice,
                             final Grade grade){
         return new Ticket(seatCount, fixedPrice, grade);
     }
