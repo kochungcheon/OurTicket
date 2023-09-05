@@ -35,8 +35,14 @@ public class Ticket {
         this.fixedPrice = fixedPrice;
         this.grade = grade;
     }
-    public static Ticket of(final int seatCount, final int fixedPrice,
+    public static Ticket of(final Integer seatCount, final Integer fixedPrice,
                             final Grade grade){
         return new Ticket(seatCount, fixedPrice, grade);
+    }
+    public void calculateSeat(final Integer requestCount){
+        if (this.seatCount < requestCount){
+            throw new RuntimeException("좌석이 부족합니다.");
+        }
+        this.seatCount -= requestCount;
     }
 }
