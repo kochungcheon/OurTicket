@@ -38,19 +38,16 @@ public class TicketService{
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 계좌입니다"));
         // account 처리 되야 한다.
         // validation
-        if (account.getAmount() < ticket.getFixedPrice()){
-            throw new RuntimeException("잔액이 부족합니다");
-        }
-        // 동시 요청 좌석 1 좌석이 구매가 되는
-        // 좌석의 계수 줄여주기
-        // 서비스 단 계산 저장 로직
-        ticket.calculateSeat(requestSeatCount);
-        ticketRepository.save(ticket);
         // 100 80 -> 20 2
         // 계좌
         // 애매
         account.calculate(ticket.getFixedPrice() * requestSeatCount);
         accountRepository.save(account);
+        // 동시 요청 좌석 1 좌석이 구매가 되는
+        // 좌석의 계수 줄여주기
+        // 서비스 단 계산 저장 로직
+        ticket.calculateSeat(requestSeatCount);
+        ticketRepository.save(ticket);
 
         MemberTicket memberTicket = MemberTicket.of(member.getId(), ticketId, ticket.getFixedPrice(), requestSeatCount);
         memberTicketRepository.save(memberTicket);
