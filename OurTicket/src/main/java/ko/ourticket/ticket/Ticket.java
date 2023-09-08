@@ -7,11 +7,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +30,7 @@ public class Ticket {
     public void setPerformance(Long performanceId){
         this.performanceId = performanceId;
     }
-    protected Ticket(){}
+
 
     private Ticket(final int seatCount, final int fixedPrice,
                    final Grade grade) {

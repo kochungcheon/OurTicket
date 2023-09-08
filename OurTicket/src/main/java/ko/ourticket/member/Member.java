@@ -7,13 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +29,6 @@ public class Member {
     @Column(nullable = false)
     private String password;
     private Long accountId;
-    protected Member(){
-    }
     private Member(final String nickName, final String password) {
         this.nickName = nickName;
         this.password = password;
