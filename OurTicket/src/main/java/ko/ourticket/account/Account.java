@@ -26,6 +26,7 @@ public class Account {
         if (this.amount < price){
             throw new RuntimeException("잔액이 부족합니다.");
         }
-        this.amount -= price;
+        Long amount = this.amount - price;
+        this.amount = amount;
     }
 }
