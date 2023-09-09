@@ -8,6 +8,7 @@ import ko.ourticket.member.MemberRepository;
 import ko.ourticket.memberticket.MemberTicket;
 import ko.ourticket.memberticket.MemberTicketRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -39,6 +40,7 @@ public class PurchaseTicketServiceTest {
     }
 
     @Test
+    @DisplayName("티켓 예매 성공")
     void purchaseTicket_success() {
         // Given
         final String nickName = "ko";
@@ -68,6 +70,7 @@ public class PurchaseTicketServiceTest {
     }
 
     @Test
+    @DisplayName("티켓 예매 실패")
     void purchaseTicket_notEnoughBalance_shouldThrowException() {
         final String nickName = "ko";
         final String password = "1234";

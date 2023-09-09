@@ -1,5 +1,6 @@
 package ko.ourticket.ticket;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -27,6 +28,7 @@ public class TicketControllerTest {
     }
 
     @Test
+    @DisplayName("티켓 예약 성공")
     void reserveTicket_success() throws Exception {
         // Given
         final String nickName = "testUser";
