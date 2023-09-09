@@ -47,10 +47,10 @@ public class PurchaseTicketServiceTest {
         Member mockMember = Member.of(nickName, password);
         mockMember.addAccount(accountId);
         final Integer seatCount = 100;
-        final Integer fixedPrice = 50000;
+        final Integer fixedPrice = 50_000;
         Grade seatGrade = Grade.S;
         Ticket mockTicket = Ticket.of(seatCount, fixedPrice, seatGrade);
-        final Long memberAccountAmount = 100000L;
+        final Long memberAccountAmount = 100_000L;
         Account mockAccount = Account.of(memberAccountAmount);
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
@@ -72,8 +72,8 @@ public class PurchaseTicketServiceTest {
         final String nickName = "ko";
         final String password = "1234";
         final Integer seatCount = 100;
-        final Integer fixedPrice = 50000;
-        final Long memberAccountAmount = 40000L;
+        final Integer fixedPrice = 50_000;
+        final Long memberAccountAmount = 40_000L;
         Grade seatGrade = Grade.S;
         final Long ticketId = 1L;
         final Long accountId = 1L;

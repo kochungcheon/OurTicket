@@ -36,7 +36,7 @@ public class TicketControllerTest {
         doNothing().when(ticketService).purchaseTicket(nickName, ticketId, requestSeatCount);
 
         // When & Then
-        mockMvc.perform(post("/api/ticket/ticketReserve")
+        mockMvc.perform(post("/api/tickets/ticketReserve")
                         .param("nickName", nickName)
                         .param("ticketId", ticketId.toString())
                         .param("requestSeatCount", requestSeatCount.toString())
