@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/ticket")
+@RequestMapping("/api/tickets")
 @RequiredArgsConstructor
 public class TicketController {
     private TicketService ticketService;
