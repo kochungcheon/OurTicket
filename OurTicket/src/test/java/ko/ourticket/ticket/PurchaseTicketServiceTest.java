@@ -1,26 +1,36 @@
 package ko.ourticket.ticket;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.Optional;
 import ko.ourticket.account.Account;
 import ko.ourticket.account.AccountRepository;
+import ko.ourticket.account.AccountService;
 import ko.ourticket.member.Member;
 import ko.ourticket.member.MemberRepository;
-import ko.ourticket.memberticket.MemberTicket;
-import ko.ourticket.memberticket.MemberTicketRepository;
+import ko.ourticket.memberticket.MemberTicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
 public class PurchaseTicketServiceTest {
 
     @InjectMocks
     private TicketService ticketService;
+
+    @Mock
+    private AccountService accountService;
+
+    @Mock
+    private MemberTicketService memberTicketService;
 
     @Mock
     private TicketRepository ticketRepository;
@@ -30,9 +40,6 @@ public class PurchaseTicketServiceTest {
 
     @Mock
     private AccountRepository accountRepository;
-
-    @Mock
-    private MemberTicketRepository memberTicketRepository;
 
     @BeforeEach
     void setUp() {
@@ -44,54 +51,66 @@ public class PurchaseTicketServiceTest {
     void purchaseTicket_success() {
         // Given
         final String nickName = "ko";
-        final String password = "1234";
-        final Long accountId = 1L;
-        Member mockMember = Member.of(nickName, password);
-        mockMember.addAccount(accountId);
-        final Seat seat = Seat.of(100);
-        final Integer fixedPrice = 50_000;
-        Grade seatGrade = Grade.S;
-        Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
-        final Long memberAccountAmount = 100_000L;
-        Account mockAccount = Account.of(memberAccountAmount, 1L);
-
-        when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
-        when(ticketRepository.findById(anyLong())).thenReturn(Optional.of(mockTicket));
-        when(accountRepository.findById(anyLong())).thenReturn(Optional.of(mockAccount));
         final Long ticketId = 1L;
         final Integer requestSeatCount = 1;
+
+        Member mockMember = mock(Member.class);
+        Ticket mockTicket = mock(Ticket.class);
+        Account mockAccount = mock(Account.class);
+        Seat mockSeat = mock(Seat.class);
+
+        when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
+        when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(mockTicket));
+        when(accountRepository.findById(anyLong())).thenReturn(Optional.of(mockAccount));
+        when(mockTicket.getSeat()).thenReturn(mockSeat);
+
         // When
         ticketService.purchaseTicket(nickName, ticketId, requestSeatCount);
 
         // Then
+        verify(accountService, times(1)).deductAmount(mockAccount, mockTicket, requestSeatCount);
+        verify(mockSeat, times(1)).reserveSeat(requestSeatCount);
         verify(ticketRepository, times(1)).save(mockTicket);
-        verify(accountRepository, times(1)).save(mockAccount);
-        verify(memberTicketRepository, times(1)).save(any(MemberTicket.class));
+        verify(memberTicketService, times(1)).registerTicketForMember(mockMember, mockTicket, requestSeatCount);
     }
 
     @Test
-    @DisplayName("티켓 예매 실패")
+    @DisplayName("티켓 예매 실패: 잔액 부족")
     void purchaseTicket_notEnoughBalance_shouldThrowException() {
         final String nickName = "ko";
-        final String password = "1234";
-        final Seat seat = Seat.of(100);
-        final Integer fixedPrice = 50_000;
-        final Long memberAccountAmount = 40_000L;
-        Grade seatGrade = Grade.S;
         final Long ticketId = 1L;
-        final Long accountId = 1L;
-        final Integer requestSeatCount = 1;
-        // Given
-        Member mockMember = Member.of(nickName, password);
-        mockMember.addAccount(accountId);
-        Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
-        Account mockAccount = Account.of(memberAccountAmount, 1L);
+        final Integer requestSeatCount = 10;
+
+        Member mockMember = mock(Member.class);
+        Ticket mockTicket = mock(Ticket.class);
+        Account mockAccount = mock(Account.class);
+        Seat mockSeat = mock(Seat.class);
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
-        when(ticketRepository.findById(anyLong())).thenReturn(Optional.of(mockTicket));
+        when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(mockTicket));
         when(accountRepository.findById(anyLong())).thenReturn(Optional.of(mockAccount));
+        when(mockTicket.getSeat()).thenReturn(mockSeat);
 
-        // When & Then
+        doThrow(RuntimeException.class).when(accountService).deductAmount(mockAccount, mockTicket, requestSeatCount);
+
+        assertThrows(RuntimeException.class, () -> ticketService.purchaseTicket(nickName, ticketId, requestSeatCount));
+    }
+
+    @Test
+    @DisplayName("티켓 예매 실패: 좌석 부족")
+    void purchaseTicket_notEnoughSeats(){
+        final String nickName = "ko";
+        final Long ticketId = 1L;
+        final Integer requestSeatCount = 10;
+
+        Member mockMember = Member.of(nickName, "1234");
+        Seat availableSeat = Seat.of(5);
+        Ticket mockTicket = Ticket.of(availableSeat, 50_000, Grade.S);
+
+
+        when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
+        when(ticketRepository.findById(ticketId)).thenReturn(Optional.of(mockTicket));
+
         assertThrows(RuntimeException.class, () -> ticketService.purchaseTicket(nickName, ticketId, requestSeatCount));
     }
 }
