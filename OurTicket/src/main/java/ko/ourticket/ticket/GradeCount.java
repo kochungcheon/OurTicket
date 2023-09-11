@@ -14,7 +14,7 @@ public record GradeCount(Map<Grade, Integer> gradeCountMap) {
                 .collect(Collectors.groupingBy(
                         Ticket::getGrade,
                         ()-> new EnumMap<Grade, Integer>(Grade.class),
-                        Collectors.summingInt(Ticket::getSeatCount)
+                        Collectors.summingInt(ticket -> ticket.getSeat().getSeatCount())
                 ));
         return new GradeCount(result);
     }

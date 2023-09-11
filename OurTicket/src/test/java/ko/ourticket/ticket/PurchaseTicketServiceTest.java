@@ -48,10 +48,10 @@ public class PurchaseTicketServiceTest {
         final Long accountId = 1L;
         Member mockMember = Member.of(nickName, password);
         mockMember.addAccount(accountId);
-        final Integer seatCount = 100;
+        final Seat seat = Seat.of(100);
         final Integer fixedPrice = 50_000;
         Grade seatGrade = Grade.S;
-        Ticket mockTicket = Ticket.of(seatCount, fixedPrice, seatGrade);
+        Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
         final Long memberAccountAmount = 100_000L;
         Account mockAccount = Account.of(memberAccountAmount);
 
@@ -74,7 +74,7 @@ public class PurchaseTicketServiceTest {
     void purchaseTicket_notEnoughBalance_shouldThrowException() {
         final String nickName = "ko";
         final String password = "1234";
-        final Integer seatCount = 100;
+        final Seat seat = Seat.of(100);
         final Integer fixedPrice = 50_000;
         final Long memberAccountAmount = 40_000L;
         Grade seatGrade = Grade.S;
@@ -84,7 +84,7 @@ public class PurchaseTicketServiceTest {
         // Given
         Member mockMember = Member.of(nickName, password);
         mockMember.addAccount(accountId);
-        Ticket mockTicket = Ticket.of(seatCount, fixedPrice, seatGrade);
+        Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
         Account mockAccount = Account.of(memberAccountAmount);
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));

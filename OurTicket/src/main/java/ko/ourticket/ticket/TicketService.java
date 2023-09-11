@@ -46,7 +46,7 @@ public class TicketService{
         // 동시 요청 좌석 1 좌석이 구매가 되는
         // 좌석의 계수 줄여주기
         // 서비스 단 계산 저장 로직
-        ticket.calculateSeat(requestSeatCount);
+        ticket.getSeat().calculateSeat(requestSeatCount);
         ticketRepository.save(ticket);
 
         MemberTicket memberTicket = MemberTicket.of(member.getId(), ticketId, ticket.getFixedPrice(), requestSeatCount);
