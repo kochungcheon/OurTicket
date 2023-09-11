@@ -25,4 +25,12 @@ public class Account {
     public static Account of(final Long amount, final Long memberId){
         return new Account(amount, memberId);
     }
+
+    public void deductAmount(Integer deductionAmount) {
+        if (this.amount < deductionAmount) {
+            throw new RuntimeException("잔액이 부족합니다.");
+        }
+        Long remainderAmount = this.amount - deductionAmount;
+        this.amount = remainderAmount;
+    }
 }
