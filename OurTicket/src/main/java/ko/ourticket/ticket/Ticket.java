@@ -33,7 +33,6 @@ public class Ticket {
         this.performanceId = performanceId;
     }
 
-
     private Ticket(final Seat seat, final int fixedPrice,
                    final Grade grade) {
         this.seat = seat;
