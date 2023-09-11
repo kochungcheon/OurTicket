@@ -6,8 +6,7 @@ import ko.ourticket.account.AccountRepository;
 import ko.ourticket.account.AccountService;
 import ko.ourticket.member.Member;
 import ko.ourticket.member.MemberRepository;
-import ko.ourticket.memberticket.MemberTicket;
-import ko.ourticket.memberticket.MemberTicketRepository;
+import ko.ourticket.memberticket.MemberTicketService;
 import ko.ourticket.performance.Performance;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +15,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TicketService{
     private final AccountService accountService;
+    private final MemberTicketService memberTicketService;
     private final TicketRepository ticketRepository;
     private final MemberRepository memberRepository;
     private final AccountRepository accountRepository;
-    private final MemberTicketRepository memberTicketRepository;
 
     public GradeCount countTicketByGradeForPerformance(Performance performance) {
         return GradeCount.from(ticketRepository.findAllById(performance.getTicketIds()));
@@ -34,13 +33,13 @@ public class TicketService{
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 상품입니다 상품Id : " + ticketId));
         Account account = accountRepository.findById(member.getAccountId())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 계좌입니다"));
+        Seat seat  = ticket.getSeat();
 
         accountService.deductAmount(account, ticket, requestSeatCount);
 
-        ticket.getSeat().calculateSeat(requestSeatCount);
+        seat.reserveSeat(requestSeatCount);
         ticketRepository.save(ticket);
 
-        MemberTicket memberTicket = MemberTicket.of(member.getId(), ticketId, ticket.getFixedPrice(), requestSeatCount);
-        memberTicketRepository.save(memberTicket);
+        memberTicketService.registerTicketForMember(member, ticket, requestSeatCount);
     }
 }

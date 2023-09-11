@@ -53,7 +53,7 @@ public class PurchaseTicketServiceTest {
         Grade seatGrade = Grade.S;
         Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
         final Long memberAccountAmount = 100_000L;
-        Account mockAccount = Account.of(memberAccountAmount);
+        Account mockAccount = Account.of(memberAccountAmount, 1L);
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
         when(ticketRepository.findById(anyLong())).thenReturn(Optional.of(mockTicket));
@@ -85,7 +85,7 @@ public class PurchaseTicketServiceTest {
         Member mockMember = Member.of(nickName, password);
         mockMember.addAccount(accountId);
         Ticket mockTicket = Ticket.of(seat, fixedPrice, seatGrade);
-        Account mockAccount = Account.of(memberAccountAmount);
+        Account mockAccount = Account.of(memberAccountAmount, 1L);
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));
         when(ticketRepository.findById(anyLong())).thenReturn(Optional.of(mockTicket));
