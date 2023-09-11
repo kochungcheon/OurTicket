@@ -3,17 +3,15 @@ package ko.ourticket.ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/tickets")
 @RequiredArgsConstructor
 public class TicketController {
     private TicketService ticketService;
 
-    @PostMapping("/ticketReserve")
+    @PostMapping("/api/tickets/ticketReserve")
     public ResponseEntity<String> reserveTicket(@RequestParam String nickName, @RequestParam Long ticketId, @RequestParam Integer requestSeatCount){
         try {
             ticketService.purchaseTicket(nickName, ticketId, requestSeatCount);
