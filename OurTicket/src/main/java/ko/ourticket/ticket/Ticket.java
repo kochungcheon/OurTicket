@@ -3,8 +3,6 @@ package ko.ourticket.ticket;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,8 +22,6 @@ public class Ticket {
     @Embedded
     private Seat seat;
     private Integer fixedPrice;
-    @Enumerated(value = EnumType.STRING)
-    private Grade grade;
 
     private Long performanceId;
     private Long memberTicketId;
@@ -33,14 +29,14 @@ public class Ticket {
         this.performanceId = performanceId;
     }
 
-    private Ticket(final Seat seat, final int fixedPrice,
-                   final Grade grade) {
+    public Grade getGrade(){
+        return seat.getGrade();
+    }
+    private Ticket(final Seat seat, final int fixedPrice) {
         this.seat = seat;
         this.fixedPrice = fixedPrice;
-        this.grade = grade;
     }
-    public static Ticket of(final Seat seat, final Integer fixedPrice,
-                            final Grade grade){
-        return new Ticket(seat, fixedPrice, grade);
+    public static Ticket of(final Seat seat, final Integer fixedPrice){
+        return new Ticket(seat, fixedPrice);
     }
 }

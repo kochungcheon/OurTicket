@@ -33,7 +33,7 @@ public class AccountServiceTest {
     @DisplayName("잔액이 충분할 때 금액 차감 성공")
     void deductAmount_success() {
         Account mockAccount = Account.of(100_000L, 1L);
-        Ticket mockTicket = Ticket.of(Seat.of(100), 50_000, Grade.S);
+        Ticket mockTicket = Ticket.of(Seat.of(100, Grade.S), 50_000);
 
         Integer requestSeatCount = 1;
         accountService.deductAmount(mockAccount, mockTicket, requestSeatCount);
@@ -46,7 +46,7 @@ public class AccountServiceTest {
     @DisplayName("잔액이 부족할 때 예외 발생")
     void deductAmount_insufficientBalance_shouldThrowException() {
         Account mockAccount = Account.of(40_000L, 1L);
-        Ticket mockTicket = Ticket.of(Seat.of(100), 50_000, Grade.S);
+        Ticket mockTicket = Ticket.of(Seat.of(100, Grade.S), 50_000);
 
         Integer requestSeatCount = 1;
         assertThrows(RuntimeException.class, () -> accountService.deductAmount(mockAccount, mockTicket, requestSeatCount));

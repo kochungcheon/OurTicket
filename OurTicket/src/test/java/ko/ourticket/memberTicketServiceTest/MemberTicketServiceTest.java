@@ -36,7 +36,7 @@ public class MemberTicketServiceTest {
     void registerTicketForMember_success() {
         Member mockMember = Member.of("ko", "1234");
         mockMember.addAccount(1L);
-        Ticket mockTicket = Ticket.of(Seat.of(100), 50_000, Grade.S);
+        Ticket mockTicket = Ticket.of(Seat.of(100, Grade.S), 50_000);
         Integer requestSeatCount = 1;
 
         memberTicketService.registerTicketForMember(mockMember, mockTicket, requestSeatCount);

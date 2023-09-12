@@ -104,8 +104,8 @@ public class PurchaseTicketServiceTest {
         final Integer requestSeatCount = 10;
 
         Member mockMember = Member.of(nickName, "1234");
-        Seat availableSeat = Seat.of(5);
-        Ticket mockTicket = Ticket.of(availableSeat, 50_000, Grade.S);
+        Seat availableSeat = Seat.of(5, Grade.S);
+        Ticket mockTicket = Ticket.of(availableSeat, 50_000);
 
 
         when(memberRepository.findByNickName(nickName)).thenReturn(Optional.of(mockMember));

@@ -44,9 +44,9 @@ public class TicketServiceTest {
         Performance performance = Performance.of(name, description, performanceDateTime);
 
         List<Ticket> tickets = Arrays.asList(
-                Ticket.of(Seat.of(10), 100000, Grade.VIP),
-                Ticket.of(Seat.of(100), 80000, Grade.R),
-                Ticket.of(Seat.of(1000), 50000, Grade.S)
+                Ticket.of(Seat.of(10, Grade.VIP), 100000),
+                Ticket.of(Seat.of(100, Grade.R), 80000),
+                Ticket.of(Seat.of(1000, Grade.S), 50000)
         );
 
         tickets.forEach(ticket -> performance.addTicketId(ticket.getId()));

@@ -1,6 +1,8 @@
 package ko.ourticket.ticket;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,17 +12,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Seat {
     private Integer seatCount;
-    private Seat(Integer seatCount){
+    @Enumerated(value = EnumType.STRING)
+    private Grade grade;
+    private Seat(Integer seatCount, Grade grade){
         this.seatCount = seatCount;
+        this.grade = grade;
     }
-    public static Seat of(final Integer seatCount){
-        return new Seat(seatCount);
+    public Grade getGrade(){
+        return this.grade;
     }
-    public Seat reserveSeat(final Integer requestCount){
+    public static Seat of(final Integer seatCount, final Grade grade){
+        return new Seat(seatCount, grade);
+    }
+    public void reserveSeat(final Integer requestCount){
         if (this.seatCount < requestCount){
             throw new RuntimeException("좌석이 부족합니다.");
         }
         Integer seatCount = this.seatCount - requestCount;
-        return new Seat(seatCount);
+        this.seatCount = seatCount;
     }
 }
