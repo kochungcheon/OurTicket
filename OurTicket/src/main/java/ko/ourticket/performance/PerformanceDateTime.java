@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PerformanceDateTime {
     private LocalDateTime performanceStartDateTime;
-    private LocalDateTime performanceEndDateTimeTime;
+    private LocalDateTime performanceEndDateTime;
 
-    public PerformanceDateTime(final LocalDateTime performanceStartDate,
+    public PerformanceDateTime(final LocalDateTime performanceStartDateTime,
                                final LocalDateTime performanceEndDateTime) {
-        this.performanceStartDateTime = performanceStartDate;
-        this.performanceEndDateTimeTime = performanceEndDateTime;
+        this.performanceStartDateTime = performanceStartDateTime;
+        this.performanceEndDateTime = performanceEndDateTime;
     }
 
-    public static PerformanceDateTime of(final LocalDateTime performanceStartDate, final LocalDateTime performanceEndDateTime){
-        return new PerformanceDateTime(performanceStartDate, performanceEndDateTime);
+    public static PerformanceDateTime of(final LocalDateTime performanceStartDateTime, final LocalDateTime performanceEndDateTime){
+        return new PerformanceDateTime(performanceStartDateTime, performanceEndDateTime);
     }
 }

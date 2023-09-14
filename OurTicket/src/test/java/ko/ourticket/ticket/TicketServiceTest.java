@@ -37,16 +37,16 @@ public class TicketServiceTest {
         final String name = "레베카";
         final String description = "...";
         final String performanceStartDateTime = "2023-01-01T00:00:00";
-        final String performanceEndDateTimeTime = "2023-01-31T01:00:00";
+        final String performanceEndDateTime = "2023-01-31T01:00:00";
         PerformanceDateTime performanceDateTime = PerformanceDateTime.of(
                 LocalDateTime.parse(performanceStartDateTime),
-                LocalDateTime.parse(performanceEndDateTimeTime));
+                LocalDateTime.parse(performanceEndDateTime));
         Performance performance = Performance.of(name, description, performanceDateTime);
 
         List<Ticket> tickets = Arrays.asList(
-                Ticket.of(10, 100000, Grade.VIP),
-                Ticket.of(100, 80000, Grade.R),
-                Ticket.of(1000, 50000, Grade.S)
+                Ticket.of(Seat.of(10, Grade.VIP), 100000),
+                Ticket.of(Seat.of(100, Grade.R), 80000),
+                Ticket.of(Seat.of(1000, Grade.S), 50000)
         );
 
         tickets.forEach(ticket -> performance.addTicketId(ticket.getId()));

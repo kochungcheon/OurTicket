@@ -9,10 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Performance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +29,6 @@ public class Performance {
     @ElementCollection
     private List<Long> ticketIds = new ArrayList<>();
 
-    protected Performance(){}
     private Performance(final String name, final String description,
                         final PerformanceDateTime performanceDateTime) {
         this.name = name;
