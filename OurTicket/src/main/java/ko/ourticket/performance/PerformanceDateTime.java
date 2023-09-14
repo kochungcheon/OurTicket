@@ -19,4 +19,8 @@ public class PerformanceDateTime {
     public static PerformanceDateTime of(final LocalDateTime performanceStartDateTime, final LocalDateTime performanceEndDateTime){
         return new PerformanceDateTime(performanceStartDateTime, performanceEndDateTime);
     }
+
+    public Boolean isCanceled() {
+        return performanceStartDateTime.isAfter(LocalDateTime.now()) ? true : false;
+    }
 }

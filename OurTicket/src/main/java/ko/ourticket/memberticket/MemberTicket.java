@@ -19,14 +19,20 @@ public class MemberTicket {
     private Long ticketId;
     private Integer realPrice;
     private Integer seatCount;
+    private Boolean isCanceled;
 
-    private MemberTicket(final Long memberId, final Long ticketId, final Integer realPrice, final Integer seatCount) {
+    public MemberTicket(final Long memberId, final Long ticketId,
+                        final Integer realPrice, final Integer seatCount,
+                        final Boolean isCanceled) {
         this.memberId = memberId;
         this.ticketId = ticketId;
         this.realPrice = realPrice;
         this.seatCount = seatCount;
+        this.isCanceled = isCanceled;
     }
-    public static MemberTicket of(final Long memberId, final Long ticketId, final Integer realPrice, final Integer seatCount) {
-        return new MemberTicket(memberId, ticketId, realPrice, seatCount);
+
+    public static MemberTicket of(final Long memberId, final Long ticketId,
+                                  final Integer realPrice, final Integer seatCount, final Boolean isCanceled) {
+        return new MemberTicket(memberId, ticketId, realPrice, seatCount, isCanceled);
     }
 }
