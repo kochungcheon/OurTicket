@@ -22,7 +22,6 @@ public class Ticket {
     @Embedded
     private Seat seat;
     private Integer fixedPrice;
-
     private Long performanceId;
     private Long memberTicketId;
     public void setPerformance(Long performanceId){
@@ -36,6 +35,7 @@ public class Ticket {
         this.seat = seat;
         this.fixedPrice = fixedPrice;
     }
+  
     public static Ticket of(final Seat seat, final Integer fixedPrice){
         return new Ticket(seat, fixedPrice);
     }
