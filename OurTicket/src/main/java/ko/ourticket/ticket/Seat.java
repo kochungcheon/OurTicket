@@ -31,4 +31,9 @@ public class Seat {
         Integer seatCount = this.count - requestCount;
         this.count = seatCount;
     }
+
+    public void addSeat(final Integer requestCount){
+        Integer totalSeatCount = this.count + requestCount;
+        this.count = totalSeatCount;
+    }
 }

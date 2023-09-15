@@ -1,10 +1,10 @@
 package ko.ourticket.ticket;
 
 import jakarta.transaction.Transactional;
-import java.time.LocalDateTime;
 import ko.ourticket.account.Account;
 import ko.ourticket.account.AccountService;
 import ko.ourticket.member.Member;
+import ko.ourticket.memberticket.MemberTicket;
 import ko.ourticket.memberticket.MemberTicketService;
 import ko.ourticket.performance.Performance;
 import ko.ourticket.performance.PerformanceService;
@@ -42,15 +42,23 @@ public class TicketService{
     }
 
     @Transactional
-    public void cancelTicket(final String nickName, final Long ticketId,
-                             final Integer requestSeatCount,final Long memberTicketId){
+    public synchronized void cancelTicket(final String nickName, final Long ticketId,
+                                          final Integer requestSeatCount,final Long memberTicketId){
         Member member = entityFinderUtil.findMemberByNickName(nickName);
         Ticket ticket = entityFinderUtil.findTicketById(ticketId);
         Account account = entityFinderUtil.findAccountByMember(member);
-        Seat seat  = ticket.getSeat();
-        // 현재 날짜와 공연 날짜를 비교 하고 환불 할 수있는 지 확인 하는 로직 mt -> t -> p
-        performanceService.isCanceled(ticket);
-        // 데드락 발생할 수 있으므로 account ticket memberTicket 순으로 로직 처리
 
-    }
-}
+        MemberTicket memberTicket = entityFinderUtil.findMemberTicketById(memberTicketId);
+        Seat seat  = ticket.getSeat();
+        // 현재 날짜와 공연 날짜를 비교 하고 환불 할 수있는 지 확인 하는 로직
+        performanceService.isCanceled(ticket);
+
+        //  기존 티켓 환불 로직
+        memberTicketService.cancelMemberTicket(memberTicket, account);
+
+        seat.addSeat(requestSeatCount);
+        ticketRepository.save(ticket);
+
+        // requestSeatCount  만큼 재 구매
+        purchaseTicket(nickName, ticketId, requestSeatCount);
+    }}

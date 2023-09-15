@@ -33,5 +33,10 @@ public class Account {
         Long remainderAmount = this.amount - deductionAmount;
         this.amount = remainderAmount;
     }
+
+    public void refundAmount(Integer refundAmount){
+        Long totalAmount = this.amount + refundAmount;
+        this.amount = totalAmount;
+    }
 }
 

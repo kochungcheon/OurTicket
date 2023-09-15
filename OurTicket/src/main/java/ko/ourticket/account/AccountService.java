@@ -15,4 +15,9 @@ public class AccountService {
         account.deductAmount(totalPaymentAmount);
         accountRepository.save(account);
     }
+
+    public void refundTicket(final Integer refundAmount, final Account account) {
+        account.refundAmount(refundAmount);
+        accountRepository.save(account);
+    }
 }
