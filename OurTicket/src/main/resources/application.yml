@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/te
+    url: jdbc:mysql://223.130.160.254:3306/te
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: ab1010
+    password: ehzjakdl
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8000
