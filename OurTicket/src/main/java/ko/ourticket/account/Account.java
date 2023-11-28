@@ -12,26 +12,26 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long amount;
-    private Long memberId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private Long amount;
+	private Long memberId;
 
-    private Account(final Long amount, final Long memberId){
-        this.amount = amount;
-        this.memberId = memberId;
-    }
-    public static Account of(final Long amount, final Long memberId){
-        return new Account(amount, memberId);
-    }
+	private Account(final Long amount, final Long memberId) {
+		this.amount = amount;
+		this.memberId = memberId;
+	}
 
-    public void deductAmount(Integer deductionAmount) {
-        if (this.amount < deductionAmount) {
-            throw new RuntimeException("잔액이 부족합니다.");
-        }
-        Long remainderAmount = this.amount - deductionAmount;
-        this.amount = remainderAmount;
-    }
+	public static Account of(final Long amount, final Long memberId) {
+		return new Account(amount, memberId);
+	}
+
+	public void deductAmount(Integer deductionAmount) {
+		if (this.amount < deductionAmount) {
+			throw new RuntimeException("잔액이 부족합니다.");
+		}
+		Long remainderAmount = this.amount - deductionAmount;
+		this.amount = remainderAmount;
+	}
 }
-
