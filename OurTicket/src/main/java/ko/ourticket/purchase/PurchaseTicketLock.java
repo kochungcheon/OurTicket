@@ -14,7 +14,7 @@ public class PurchaseTicketLock {
 
 	public void purchaseInOrder(final String nickName, final Long ticketId,
 		final Integer requestSeatCount) {
-		lock.lock(() -> purchaseFacadeService.purchaseTicket(nickName, ticketId, requestSeatCount));
+		lock.lock(ticketId, () -> purchaseFacadeService.purchaseTicket(nickName, ticketId, requestSeatCount));
 		}
 	}
 

@@ -1,5 +1,6 @@
 package ko.ourticket.purchase;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.stereotype.Component;
@@ -9,15 +10,14 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class PurchaseLock implements Lockable {
-	private ReentrantLock lock = new ReentrantLock(true);
-
-	public void lock(Runnable runnable) {
-		lock.lock();
+	private ConcurrentHashMap<Long, ReentrantLock> lock = new ConcurrentHashMap<>();
+	public void lock(Long ticketId, Runnable runnable) {
+		System.out.println(ticketId);
+		lock.computeIfAbsent(ticketId, k -> new ReentrantLock(true)).lock();
 		try {
 			runnable.run();
 		} finally {
-			lock.unlock();
-		}
-		;
+			lock.get(ticketId).unlock();
+		};
 	}
 }

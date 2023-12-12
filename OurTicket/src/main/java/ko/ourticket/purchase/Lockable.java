@@ -2,5 +2,5 @@ package ko.ourticket.purchase;
 
 @FunctionalInterface
 public interface Lockable {
-	void lock(Runnable runnable);
+	void lock(Long ticketId, Runnable runnable);
 }
